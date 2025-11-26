@@ -5,194 +5,35 @@
   <title>CHIA X HAO 🇯🇵 九州之旅</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Noto Sans TC", system-ui, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif; }
+    body { background: #0d0f33; color: #fff; display: flex; justify-content: center; padding: 24px 12px; }
+    .app { width: 100%; max-width: 420px; background: linear-gradient(180deg, #3447ff 0%, #4c6dff 40%, #f5f6fb 40%); border-radius: 28px; overflow: hidden; box-shadow: 0 18px 40px rgba(0,0,0,0.35); }
 
-    body {
-      background: #0d0f33;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      padding: 24px 12px;
-    }
+    .app-header { padding: 20px 20px 12px; color: #fff; }
+    .trip-name { font-size: 22px; font-weight: 700; margin-bottom: 2px; }
+    .trip-sub { opacity: 0.9; font-size: 18px; font-weight: 600; }
+    .trip-dates { margin-top: 6px; font-size: 12px; opacity: 0.8; letter-spacing: 0.5px; }
 
-    .app {
-      width: 100%;
-      max-width: 420px;
-      background: linear-gradient(180deg, #3447ff 0%, #4c6dff 40%, #f5f6fb 40%);
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-    }
+    .day-tabs { display: flex; gap: 8px; padding: 12px 16px 18px; overflow-x: auto; scrollbar-width: none; }
+    .day-tabs::-webkit-scrollbar { display: none; }
+    .day-tab { flex: 0 0 auto; min-width: 64px; padding: 10px 8px; border-radius: 18px; background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.9); text-align: center; font-size: 11px; cursor: pointer; border: 0; transition: .2s; }
+    .day-tab.active { background: #fff; color: #3447ff; box-shadow: 0 4px 12px rgba(0,0,0,0.18); transform: translateY(-1px); }
+  
+    .content { padding: 18px; background: #f5f6fb; color: #1f2340; min-height: 340px; }
+    .day-header { display: flex; justify-content: space-between; margin-bottom: 14px; }
+    .day-title-block { font-size: 18px; font-weight: 700; }
+    .day-title-block small { display: block; font-size: 12px; color: #7b7f9a; margin-top: 4px; }
 
-    .app-header {
-      padding: 20px 20px 12px;
-      color: #fff;
-    }
+    .weather { text-align: right; font-size: 13px; color: #7b7f9a; }
+    .weather .temp { font-size: 22px; font-weight: 700; color: #3447ff; }
 
-    .trip-name {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .trip-sub {
-      opacity: 0.9;
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    .trip-dates {
-      margin-top: 6px;
-      font-size: 12px;
-      opacity: 0.8;
-      letter-spacing: 0.5px;
-    }
-
-    .day-tabs {
-      display: flex;
-      gap: 8px;
-      padding: 12px 16px 18px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .day-tabs::-webkit-scrollbar {
-      display: none;
-    }
-
-    .day-tab {
-      flex: 0 0 auto;
-      min-width: 64px;
-      padding: 10px 8px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.14);
-      color: rgba(255, 255, 255, 0.9);
-      text-align: center;
-      font-size: 11px;
-      cursor: pointer;
-      border: 0;
-      outline: none;
-      transition: all 0.2s ease;
-    }
-
-    .day-tab span.date {
-      display: block;
-      font-size: 11px;
-      margin-bottom: 4px;
-      opacity: 0.85;
-    }
-
-    .day-tab span.label {
-      display: block;
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .day-tab.active {
-      background: #fff;
-      color: #3447ff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
-      transform: translateY(-1px);
-    }
-
-    .content {
-      padding: 18px 18px 22px;
-      background: #f5f6fb;
-      color: #1f2340;
-      min-height: 340px;
-    }
-
-    .day-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .day-title-block {
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .day-title-block small {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      color: #7b7f9a;
-      margin-top: 4px;
-    }
-
-    .weather {
-      text-align: right;
-      font-size: 13px;
-      color: #7b7f9a;
-    }
-
-    .weather .temp {
-      font-size: 22px;
-      font-weight: 700;
-      color: #3447ff;
-    }
-
-    .card {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 14px 14px 10px;
-      margin-bottom: 10px;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 8px;
-    }
-
-    .time {
-      font-size: 18px;
-      font-weight: 700;
-      color: #3447ff;
-    }
-
-    .tag {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: #eef0ff;
-      color: #3447ff;
-      font-weight: 600;
-    }
-
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .card-subtitle {
-      font-size: 12px;
-      color: #878ba2;
-      margin-bottom: 4px;
-    }
-
-    .card-meta {
-      font-size: 11px;
-      color: #a0a4bc;
-    }
-
-    .empty-msg {
-      text-align: center;
-      padding: 40px 16px;
-      color: #9b9fb4;
-      font-size: 14px;
-    }
+    .card { background: #fff; border-radius: 20px; padding: 14px; margin-bottom: 10px; box-shadow: 0 8px 18px rgba(0,0,0,0.05); }
+    .card-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .time { font-size: 18px; font-weight: 700; color: #3447ff; }
+    .tag { font-size: 11px; padding: 3px 8px; border-radius: 999px; background: #eef0ff; color: #3447ff; }
+    .card-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .card-subtitle { font-size: 12px; color: #878ba2; margin-bottom: 4px; }
+    .card-meta { font-size: 11px; color: #a0a4bc; }
   </style>
 </head>
 <body>
@@ -204,119 +45,113 @@
     </header>
 
     <nav class="day-tabs" id="dayTabs"></nav>
-
     <main class="content" id="dayContent"></main>
   </div>
 
   <script>
+    const API_KEY = "f59530fab0600c5a0ff62aa969a9e59a";
+
+    async function getWeather(city) {
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=zh_tw`;
+      const res = await fetch(url);
+      const data = await res.json();
+      return {
+        temp: Math.round(data.main.temp),
+        icon: convertIcon(data.weather[0].icon)
+      };
+    }
+
+    function convertIcon(code) {
+      if (code.includes("01")) return "☀️";
+      if (code.includes("02")) return "⛅️";
+      if (code.includes("03")) return "☁️";
+      if (code.includes("04")) return "☁️";
+      if (code.includes("09")) return "🌧";
+      if (code.includes("10")) return "🌦";
+      if (code.includes("11")) return "⛈";
+      if (code.includes("13")) return "❄️";
+      if (code.includes("50")) return "🌫";
+      return "🌤";
+    }
+
     const itinerary = [
-      {
-        id: "D1",
-        date: "01/01",
-        weekday: "三",
-        title: "抵達福岡・LaLaport・博多運河城",
-        weather: { temp: 8, icon: "⛅️", place: "福岡" },
-        events: [
-          { time: "11:00", tag: "抵達", title: "抵達福岡", subtitle: "", meta: "" },
-          { time: "12:00", tag: "購物", title: "LaLaport 福岡", subtitle: "", meta: "" },
-          { time: "15:00", tag: "景點", title: "博多運河城", subtitle: "", meta: "" },
-          { time: "住宿", tag: "飯店", title: "S-Peria Hotel Hakata", subtitle: "含早餐", meta: "" }
+      { id:"D1", date:"01/01", weekday:"三", city:"Fukuoka",
+        title:"抵達福岡・LaLaport・博多運河城",
+        events:[
+          {time:"11:00", tag:"抵達", title:"抵達福岡"},
+          {time:"12:00", tag:"購物", title:"LaLaport 福岡"},
+          {time:"15:00", tag:"景點", title:"博多運河城"},
+          {time:"住宿", tag:"飯店", title:"S-Peria Hotel Hakata", subtitle:"含早餐"}
         ]
       },
-
-      {
-        id: "D2",
-        date: "01/02",
-        weekday: "四",
-        title: "租車・野生動物園・別府地獄谷・由布院",
-        weather: { temp: 6, icon: "☀️", place: "大分" },
-        events: [
-          { time: "09:00", tag: "租車", title: "取車：スカイレンタカー博多駅店" },
-          { time: "11:00", tag: "景點", title: "九州野生動物園" },
-          { time: "13:00", tag: "景點", title: "別府地獄谷" },
-          { time: "14:30", tag: "展望", title: "狭霧台上展望所" },
-          { time: "15:00", tag: "景點", title: "湯布院童話村" },
-          { time: "住宿", tag: "飯店", title: "花之湯旅館 Oyado Hananoyu", subtitle: "18:00 前需 check-in" }
+      { id:"D2", date:"01/02", weekday:"四", city:"Oita",
+        title:"租車・野生動物園・別府地獄谷・由布院",
+        events:[
+          {time:"09:00", tag:"租車", title:"スカイレンタカー博多駅店"},
+          {time:"11:00", tag:"景點", title:"九州野生動物園"},
+          {time:"13:00", tag:"景點", title:"別府地獄谷"},
+          {time:"14:30", tag:"展望", title:"狭霧台上展望所"},
+          {time:"15:00", tag:"景點", title:"湯布院童話村"},
+          {time:"住宿", tag:"飯店", title:"花之湯旅館 Oyado Hananoyu", subtitle:"18:00 前需入住"}
         ]
       },
-
-      {
-        id: "D3",
-        date: "01/03",
-        weekday: "五",
-        title: "上色見神社・阿蘇火山口・草千里・入住 Villa",
-        weather: { temp: 3, icon: "🌤", place: "阿蘇" },
-        events: [
-          { time: "11:00", tag: "景點", title: "上色見熊野座神社" },
-          { time: "12:30", tag: "景點", title: "阿蘇中岳火山口" },
-          { time: "14:00", tag: "自然", title: "草千里之濱" },
-          { time: "16:00", tag: "採買", title: "Ebisupana Aso 採買晚餐" },
-          { time: "住宿", tag: "Villa", title: "藤のヴィラ Fujino Villa", subtitle: "房門密碼：0325" }
+      { id:"D3", date:"01/03", weekday:"五", city:"Aso",
+        title:"上色見神社・阿蘇火山口・草千里・入住 Villa",
+        events:[
+          {time:"11:00", tag:"景點", title:"上色見熊野座神社"},
+          {time:"12:30", tag:"景點", title:"阿蘇中岳火山口"},
+          {time:"14:00", tag:"自然", title:"草千里之濱"},
+          {time:"16:00", tag:"採買", title:"Ebisupana Aso"},
+          {time:"住宿", tag:"Villa", title:"藤のヴィラ Fujino Villa", subtitle:"密碼 0325"}
         ]
       },
-
-      {
-        id: "D4",
-        date: "01/04",
-        weekday: "六",
-        title: "阿蘇直升機・高千歲小火車・天安河原",
-        weather: { temp: 5, icon: "🌤", place: "高千穗" },
-        events: [
-          { time: "10:00", tag: "體驗", title: "阿蘇山直升機遊覽" },
-          { time: "14:00", tag: "交通", title: "高千歲小火車" },
-          { time: "15:30", tag: "景點", title: "天安河原" },
-          { time: "住宿", tag: "飯店", title: "Hotel Takachiho", subtitle: "含早+晚餐" }
+      { id:"D4", date:"01/04", weekday:"六", city:"Takachiho",
+        title:"阿蘇直升機・高千歲小火車・天安河原",
+        events:[
+          {time:"10:00", tag:"體驗", title:"阿蘇山直升機遊覽"},
+          {time:"14:00", tag:"交通", title:"高千歲小火車"},
+          {time:"15:30", tag:"景點", title:"天安河原"},
+          {time:"住宿", tag:"飯店", title:"Hotel Takachiho", subtitle:"含早＋晚餐"}
         ]
       },
-
-      {
-        id: "D5",
-        date: "01/05",
-        weekday: "日",
-        title: "高千穗划船・太宰府・天神 LOFT・還車",
-        weather: { temp: 8, icon: "☀️", place: "福岡" },
-        events: [
-          { time: "08:30", tag: "早餐", title: "飯店早餐" },
-          { time: "10:00", tag: "體驗", title: "高千穗划船" },
-          { time: "13:00", tag: "景點", title: "太宰府天滿宮" },
-          { time: "15:00", tag: "購物", title: "天神 LOFT" },
-          { time: "17:00", tag: "美食", title: "買明太子麵包" },
-          { time: "20:00", tag: "還車", title: "スカイレンタカー博多駅店 還車" },
-          { time: "住宿", tag: "飯店", title: "ZONK HOTEL Hakata" }
+      { id:"D5", date:"01/05", weekday:"日", city:"Fukuoka",
+        title:"划船・太宰府・天神・還車",
+        events:[
+          {time:"08:30", tag:"早餐", title:"飯店早餐"},
+          {time:"10:00", tag:"體驗", title:"高千穗划船"},
+          {time:"13:00", tag:"景點", title:"太宰府天滿宮"},
+          {time:"15:00", tag:"購物", title:"天神 LOFT"},
+          {time:"17:00", tag:"美食", title:"買明太子麵包"},
+          {time:"20:00", tag:"還車", title:"スカイレンタカー博多駅店"},
+          {time:"住宿", tag:"飯店", title:"ZONK HOTEL Hakata"}
         ]
       },
-
-      {
-        id: "D6",
-        date: "01/06",
-        weekday: "一",
-        title: "前往機場・搭機返台",
-        weather: { temp: 8, icon: "⛅️", place: "福岡" },
-        events: [
-          { time: "09:00", tag: "交通", title: "抵達機場" },
-          { time: "11:40", tag: "搭機", title: "回台灣" }
+      { id:"D6", date:"01/06", weekday:"一", city:"Fukuoka",
+        title:"返台",
+        events:[
+          {time:"09:00", tag:"交通", title:"抵達機場"},
+          {time:"11:40", tag:"搭機", title:"回台灣"}
         ]
       }
     ];
 
-    // UI 建置
     const dayTabs = document.getElementById("dayTabs");
     const dayContent = document.getElementById("dayContent");
 
-    itinerary.forEach((day, index) => {
-      const tab = document.createElement("button");
-      tab.className = "day-tab" + (index === 0 ? " active" : "");
-      tab.innerHTML = `<span class="date">${day.date}</span><span class="label">${day.id}</span>`;
-      tab.onclick = () => renderDay(index);
-      dayTabs.appendChild(tab);
+    itinerary.forEach((day, idx) => {
+      const btn = document.createElement("button");
+      btn.className = "day-tab" + (idx===0?" active":"");
+      btn.innerHTML = `<span class="date">${day.date}</span><span class="label">${day.id}</span>`;
+      btn.onclick = () => renderDay(idx);
+      dayTabs.appendChild(btn);
     });
 
-    function renderDay(i) {
-      [...dayTabs.children].forEach((tab, idx) =>
-        tab.classList.toggle("active", idx === i)
-      );
+    async function renderDay(index) {
+      [...dayTabs.children].forEach((t,i)=>t.classList.toggle("active", i===index));
+      const day = itinerary[index];
 
-      const day = itinerary[i];
+      const weather = await getWeather(day.city);
+
       dayContent.innerHTML = `
         <div class="day-header">
           <div class="day-title-block">
@@ -324,31 +159,20 @@
             <small>${day.date}（${day.weekday}）</small>
           </div>
           <div class="weather">
-            <div class="temp">${day.weather.temp}°</div>
-            <div>${day.weather.icon} ${day.weather.place}</div>
+            <div class="temp">${weather.temp}°</div>
+            <div>${weather.icon} ${day.city}</div>
           </div>
         </div>
-        ${day.events
-          .map(
-            (e) => `
+        ${day.events.map(e => `
           <div class="card">
             <div class="card-header">
               <div class="time">${e.time}</div>
               <div class="tag">${e.tag}</div>
             </div>
             <div class="card-title">${e.title}</div>
-            ${
-              e.subtitle
-                ? `<div class="card-subtitle">${e.subtitle}</div>`
-                : ""
-            }
-            ${
-              e.meta ? `<div class="card-meta">${e.meta}</div>` : ""
-            }
+            ${e.subtitle ? `<div class="card-subtitle">${e.subtitle}</div>` : ""}
           </div>
-        `
-          )
-          .join("")}
+        `).join("")}
       `;
     }
 
