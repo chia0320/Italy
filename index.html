@@ -1,185 +1,193 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <title>CHIA X HAO 🇯🇵 九州之旅</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羅馬帝國：時光旅人深度手冊</title>
+    <style>
+        :root {
+            --ancient-gold: #c5a059;
+            --marble-white: #f4f4f4;
+            --roman-red: #8b0000;
+            --dark-stone: #2c2c2c;
+        }
 
-  <style>
-    :root {
-      --bg-main: #f7f5ef;
-      --bg-header: #d9e2d2;
-      --bg-tab: #e7ecdf;
-      --tab-active: #b8c9b1;
-      --text-main: #3e4a3f;
-      --card-bg: #ffffff;
-      --card-shadow: rgba(0,0,0,0.08);
-      --accent: #6f8f72;
-    }
+        body {
+            font-family: 'Segoe UI', Microsoft JhengHei, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background-color: var(--marble-white);
+            color: #333;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Noto Sans TC"; }
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
 
-    body {
-      background: var(--bg-main);
-      display: flex;
-      justify-content: center;
-      padding: 24px 12px;
-      color: var(--text-main);
-    }
+        .container {
+            max-width: 800px;
+            margin: -50px auto 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
 
-    .app {
-      width: 100%;
-      max-width: 420px;
-      background: var(--bg-main);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-      border: 1px solid #e5e2da;
-    }
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #ccc;
+        }
 
-    .app-header { padding: 20px 20px 12px; background: var(--bg-header); }
-    .trip-name { font-size: 22px; font-weight: 700; }
-    .trip-sub { font-size: 16px; margin-top: 4px; opacity: .85; }
-    .trip-dates { font-size: 12px; margin-top: 6px; opacity: .7; }
+        h2 {
+            color: var(--roman-red);
+            border-left: 5px solid var(--ancient-gold);
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+        }
 
-    .day-tabs {
-      display: flex; gap: 8px; padding: 12px 16px 18px;
-      overflow-x: auto; background: var(--bg-main);
-      scrollbar-width: none;
-    }
-    .day-tabs::-webkit-scrollbar { display: none; }
+        .highlight-box {
+            background-color: #fff9f0;
+            border: 1px solid var(--ancient-gold);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
 
-    .day-tab {
-      flex:0 0 auto; min-width:64px; padding:10px 8px;
-      border-radius:14px; background:var(--bg-tab); text-align:center;
-      font-size:12px; cursor:pointer; color:var(--text-main);
-      border:1px solid #d6d8ce; transition:.2s;
-    }
-    .day-tab.active { background:var(--tab-active); border-color:#a7b89f; transform:translateY(-1px); }
+        .colosseum-deep-dive {
+            background: var(--dark-stone);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-    .content { padding: 18px; }
-    .day-header { display:flex; justify-content:space-between; margin-bottom:14px; }
-    .day-title-block { font-size:18px; font-weight:700; }
-    .day-title-block small { font-size:12px; opacity:.7; }
+        .timeline-step {
+            border-left: 2px solid var(--ancient-gold);
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
 
-    .weather { text-align:right; color:var(--accent); }
-    .weather .temp { font-size:20px; font-weight:700; }
+        .timeline-step::before {
+            content: '●';
+            color: var(--ancient-gold);
+            position: absolute;
+            left: -8px;
+            top: 0;
+        }
 
-    .card {
-      background:var(--card-bg); border-radius:18px; padding:14px;
-      margin-bottom:10px; cursor:pointer;
-      border:1px solid #ecebe6;
-      box-shadow:0 6px 14px var(--card-shadow);
-      transition:.15s;
-    }
-    .card:hover { transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.12); }
+        .img-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #666;
+            background-size: cover;
+            background-position: center;
+        }
 
-    .card-header { display:flex; justify-content:space-between; margin-bottom:6px; }
-    .time { font-size:17px; font-weight:700; color:var(--accent); }
-    .tag { font-size:12px; padding:3px 8px; border-radius:999px; background:#eef3ea; border:1px solid #dae4d6; }
-
-    .card-title { font-size:15px; font-weight:600; margin-bottom:4px; }
-    .card-subtitle { font-size:13px; opacity:.7; }
-
-  </style>
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
-
 <body>
 
-  <div class="app">
+<header>
+    <h1>羅馬帝國：時光旅人深度手冊</h1>
+    <p>永恆之城的一日深度漫遊</p>
+</header>
 
-    <!-- Header -->
-    <header class="app-header">
-      <div class="trip-name">CHIA X HAO 🇯🇵 九州之旅</div>
-      <div class="trip-sub">Kyushu Japan</div>
-      <div class="trip-dates">JAN 01 – JAN 06, 2026</div>
-    </header>
-
-    <!-- ⭐ 你缺少的就是這兩個區塊 ⭐ -->
-    <nav class="day-tabs" id="dayTabs"></nav>
-    <main class="content" id="dayContent"></main>
-    <!-- ⭐ 缺它們內容就全空白 ⭐ -->
-
-  </div>
-
-<script>
-
-  /* ====== 行程表（我保留你原始內容） ====== */
-  const itinerary = <?= JSON_encode_your_data_here ?> 
-  /* 我這裡簡述，實際套用你原本的 itinerary */
-
-</script>
-<script>
-
-  const API_KEY = "f59530fab0600c5a0ff62aa969a9e59a";
-
-  async function getWeather(city) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=zh_tw`;
-    try {
-      const r = await fetch(url);
-      const d = await r.json();
-      return { temp: Math.round(d.main.temp), icon: convertIcon(d.weather[0].icon) };
-    } catch { return { temp:"--", icon:"🌤" }; }
-  }
-
-  function convertIcon(code) {
-    if (code.includes("01")) return "☀️";
-    if (code.includes("02")) return "⛅️";
-    if (code.includes("03")) return "🌥";
-    if (code.includes("04")) return "☁️";
-    if (code.includes("09")) return "🌧";
-    if (code.includes("10")) return "🌦";
-    if (code.includes("11")) return "⛈";
-    if (code.includes("13")) return "❄️";
-    if (code.includes("50")) return "🌫";
-    return "🌤";
-  }
-
-  const dayTabs = document.getElementById("dayTabs");
-  const dayContent = document.getElementById("dayContent");
-
-  itinerary.forEach((day, idx)=> {
-    const btn = document.createElement("button");
-    btn.className = "day-tab" + (idx===0 ? " active" : "");
-    btn.innerHTML = `<span class="date">${day.date}</span><span class="label">${day.id}</span>`;
-    btn.onclick = ()=> renderDay(idx);
-    dayTabs.appendChild(btn);
-  });
-
-  async function renderDay(index) {
-    [...dayTabs.children].forEach((t,i)=> t.classList.toggle("active", i===index));
-    const day = itinerary[index];
-    const weather = await getWeather(day.city);
-
-    dayContent.innerHTML = `
-      <div class="day-header">
-        <div class="day-title-block">
-          ${day.title}
-          <small>${day.date}（${day.weekday}）</small>
+<div class="container">
+    <div class="section">
+        <h2>🏛️ 羅馬競技場 (Colosseo)</h2>
+        <p><strong>建議停留：</strong> 120 分鐘 | <strong>門票：</strong> 頂層 (Attico) 含地下室</p>
+        
+        <div class="img-placeholder" style="background-image: url('https://images.unsplash.com/photo-1594913785162-e6785b423cb1?auto=format&fit=crop&w=800&q=80');">
+            [競技場全景圖]
         </div>
-        <div class="weather">
-          <div class="temp">${weather.temp}°</div>
-          <div>${weather.icon} ${day.city}</div>
+
+        <div class="colosseum-deep-dive">
+            <h3>⏳ 2 小時深度探索路徑</h3>
+            
+            <div class="timeline-step">
+                <strong>0-40 min: 階級與建築</strong>
+                <p>觀察入座系統。底層大理石（元老院）與頂層木座（平民）的對比。了解「嘔吐口」如何在15分鐘內疏散5萬人。</p>
+            </div>
+
+            <div class="timeline-step">
+                <strong>40-70 min: 地下地獄 (Hypogeum)</strong>
+                <p>俯瞰迷宮般的地下室。想像28部奴隸操作的升降機，將猛獸與鬥士瞬間送上地面。</p>
+            </div>
+
+            <div class="timeline-step">
+                <strong>70-110 min: 登頂雲端 (Attico)</strong>
+                <p>抵達最高點！這裡是操作 <em>Velarium</em>（巨型遮陽帆布）的基地，也是俯瞰君士坦丁凱旋門與廣場的最佳角度。</p>
+            </div>
         </div>
-      </div>
+    </div>
 
-      ${day.events.map(e=>`
-        <div class="card" onclick="openMap('${e.map}')">
-          <div class="card-header">
-            <div class="time">${e.time}</div>
-            <div class="tag">${e.tag}</div>
-          </div>
-          <div class="card-title">${e.title}</div>
+    <div class="section">
+        <h2>🏹 君士坦丁凱旋門 (Arco di Costantino)</h2>
+        <div class="img-placeholder" style="background-image: url('https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=800&q=80');">
+            [凱旋門細節圖]
         </div>
-      `).join("")}
-    `;
-  }
+        <p><strong>歷史看點：</strong> 資源回收的藝術。牆上的浮雕是從早期皇帝的建築「借用」而來的，象徵著帝國晚期藝術風格的轉變。</p>
+    </div>
 
-  function openMap(url){ window.open(url, "_blank"); }
+    <div class="section">
+        <h2>🛁 卡拉卡拉浴場 (Terme di Caracalla)</h2>
+        <div class="img-placeholder" style="background-image: url('https://images.unsplash.com/photo-1599074914978-2946b69e5745?auto=format&fit=crop&w=800&q=80');">
+            [浴場遺址圖]
+        </div>
+        <div class="highlight-box">
+            <strong>導遊筆記：</strong> 這不僅是浴室，是羅馬人的社交中心。包含圖書館、健身房與冷熱水循環系統，可容納 1600 人。
+        </div>
+    </div>
 
-  renderDay(0);
+    <div class="section">
+        <h2>📜 古羅馬廣場 (Foro Romano)</h2>
+        <div class="img-placeholder" style="background-image: url('https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&w=800&q=80');">
+            [廣場全景圖]
+        </div>
+        <ul>
+            <li><strong>凱撒神廟：</strong> 凱撒火化的原址，常年有人獻花。</li>
+            <li><strong>元老院：</strong> 羅馬共和國權力的心臟。</li>
+        </ul>
+    </div>
 
-</script>
+    <div class="section">
+        <h2>🌄 卡比托利歐山 (Campidoglio)</h2>
+        <div class="img-placeholder" style="background-image: url('https://images.unsplash.com/photo-1515542641795-85ed3b59c367?auto=format&fit=crop&w=800&q=80');">
+            [米開朗基羅廣場]
+        </div>
+        <p><strong>完美句點：</strong> 由米開朗基羅設計。繞到建築後方，可以拍到整個古羅馬廣場的黃昏全景。</p>
+    </div>
+
+    <footer>
+        <p>🇮🇹 祝您在羅馬度過美好的一天 | Buona Giornata!</p>
+    </footer>
+</div>
 
 </body>
 </html>
